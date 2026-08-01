@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.GeoExplorerPro" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 预留毛玻璃与青绿色系主色调 -->
+        <item name="colorPrimary">#00796B</item>
+    </style>
+</resources>
