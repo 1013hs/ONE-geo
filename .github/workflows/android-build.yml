@@ -23,9 +23,17 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    # 直接使用全局安装的 gradle 命令进行编译，避免依赖本地 gradlew 脚本
-    - name: Build Debug APK with Gradle
-      run: gradle assembleDebug
+    # 1. 自动在云端生成 gradlew 及其配套文件
+    - name: Generate Gradle Wrapper
+      run: gradle wrapper --gradle-version 8.5
+
+    # 2. 赋予 gradlew 执行权限
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # 3. 使用生成的 gradlew 进行编译
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
