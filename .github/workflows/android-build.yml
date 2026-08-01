@@ -23,12 +23,9 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    # 关键修复：自动生成 gradle wrapper 脚本，解决找不到 ./gradlew 的问题
-    - name: Generate Gradle Wrapper
-      run: gradle wrapper --gradle-version 8.5
-
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
+    # 直接使用全局安装的 gradle 命令进行编译，避免依赖本地 gradlew 脚本
+    - name: Build Debug APK with Gradle
+      run: gradle assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
