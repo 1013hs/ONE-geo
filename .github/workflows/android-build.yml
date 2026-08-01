@@ -20,11 +20,17 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    # 使用官方 gradle actions 提供的 build 任务，它会自动处理所有环境和 wrapper 问题
+    # 关键修改：显式指定 gradle-version，让插件自动配置并解决没有 gradlew 的问题
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'
+
     - name: Build with Gradle Actions
       uses: gradle/actions/setup-gradle@v3
       with:
         arguments: assembleDebug
+        gradle-version: '8.5'
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
